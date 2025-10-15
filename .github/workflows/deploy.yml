@@ -25,6 +25,7 @@ jobs:
 
     # 打包正式环境
     - name: Build
+      working-directory: ./frontend
       run: npm run build
 
     - name: Deploy to Server
