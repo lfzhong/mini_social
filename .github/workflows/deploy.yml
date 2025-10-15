@@ -29,9 +29,9 @@ jobs:
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@v5.0.3
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.TEST1_KEY }}
-        REMOTE_HOST: ${{ secrets.TEST1_HOST }}
-        REMOTE_USER: ${{ secrets.TEST1_USER }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        REMOTE_USER: ${{ secrets.REMOTE_USER }}
         ARGS: "-avzr --delete"
         SOURCE: "frontend/build/"
         TARGET: "/var/www/html"
