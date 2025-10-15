@@ -33,5 +33,5 @@ jobs:
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
         ARGS: "-avzr --delete"
-        SOURCE: "frontend/build/"
+        SOURCE: "frontend/dist/"
         TARGET: "/var/www/html"
