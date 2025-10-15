@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { validateEmail, validatePassword } from '@/utils/validation';
+import { validateEmail } from '@/utils/validation';
 import { ROUTES } from '@/utils/constants';
 
 export const LoginForm: React.FC = () => {
