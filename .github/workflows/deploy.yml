@@ -1,40 +1,37 @@
-# This is a basic workflow that is dev triggered
+name: Auto Deploy to EC2
 
-name: auto deploy to server
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
-  workflow_dispatch:  # 手动执行工作流
+  workflow_dispatch:
   push:
     branches:
-      - main  # main分支push时自动执行工作流
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # 下载源码
     steps:
+    # Step 1: Checkout code
     - name: Checkout code
       uses: actions/checkout@v4
-      
-    # 安装依赖
-    - name: Install Dependencies
+
+    # Step 2: Install dependencies inside /frontend
+    - name: Install dependencies
+      working-directory: ./frontend
       run: npm install
 
-    # 打包正式环境
-    - name: Build
+    # Step 3: Build production files
+    - name: Build frontend
       working-directory: ./frontend
       run: npm run build
 
-    - name: Deploy to Server
+    # Step 4: Deploy built files to EC2
+    - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@v5.0.3
       env:
         SSH_PRIVATE_KEY: ${{ secrets.TEST1_KEY }}
         REMOTE_HOST: ${{ secrets.TEST1_HOST }}
         REMOTE_USER: ${{ secrets.TEST1_USER }}
-        ARGS: "-avzL"
-        SOURCE: "frontend/dist/"
-        TARGET: "/server/www/firebase-demo"
-#        SCRIPT_AFTER: |
+        ARGS: "-avzr --delete"
+        SOURCE: "frontend/build/"
+        TARGET: "/var/www/html"
