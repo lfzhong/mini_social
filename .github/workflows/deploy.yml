@@ -35,6 +35,6 @@ jobs:
         REMOTE_HOST: ${{ secrets.TEST1_HOST }}
         REMOTE_USER: ${{ secrets.TEST1_USER }}
         ARGS: "-avzL"
-        SOURCE: "dist/"
+        SOURCE: "frontend/dist/"
         TARGET: "/server/www/firebase-demo"
 #        SCRIPT_AFTER: |
